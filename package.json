@@ -8,7 +8,11 @@
     "test": "env-cmd jest",
     "docs:generate": "apidoc -i controllers/ -o public/"
   },
-  "keywords": ["rest-api","express","boilerplate"],
+  "keywords": [
+    "rest-api",
+    "express",
+    "boilerplate"
+  ],
   "author": "Yogi Saputro",
   "license": "MIT",
   "dependencies": {
@@ -19,6 +23,6 @@
   },
   "apidoc": {
     "title": "Express Microservice Docs",
-    "url" : "https://api.example.com/v1"
+    "url": "https://api.example.com/v1"
   }
 }

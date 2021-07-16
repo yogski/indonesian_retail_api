@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const exampleController = require('./controllers/example');
+const ProductController = require('./controllers/products');
 
-router.get('/examples', exampleController.getAll);
-router.post('/examples', exampleController.create);
+router.get('/product/barcode/:barcode', ProductController.getByBarcode);
+router.get('/product/name/:name', ProductController.getByProductName);
+// router.post('/examples', ProductController.create);
 
 // Return 404 for others
 router.get('*', function (req, res) {
