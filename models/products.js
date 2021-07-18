@@ -48,6 +48,20 @@ module.exports = {
       throw new Error(error);
     }
   },
+  checkBarcodeExists : async (params) => {
+    try {
+      const results = await db.any(
+        `SELECT count(*) 
+        FROM main_products 
+        WHERE barcode = $1
+        AND is_active = 1`
+      , [params.barcode]);
+      return (results.count > 0) ? true : false; 
+    } catch (error) {
+      console.log(error);
+      throw new Error(error);
+    }
+  },
   create : async (payload) => {
     try {
       const create = await await db.none('INSERT INTO examples(column1, column2) VALUES($1, $2)', [payload.item_1, payload.item_2])

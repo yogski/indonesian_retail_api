@@ -2,8 +2,11 @@ const express = require('express');
 const router = express.Router();
 const ProductController = require('./controllers/products');
 
-router.get('/product/barcode/:barcode', ProductController.getByBarcode);
-router.get('/product/name/:name', ProductController.getByProductName);
+// Endpoint: search
+router.get('/search/barcode/:barcode', ProductController.getByBarcode);
+router.get('/search/name/:name', ProductController.getByProductName);
+
+router.get('/check/barcode/:barcode', ProductController.checkBarcodeExists);
 // router.post('/examples', ProductController.create);
 
 // Return 404 for others

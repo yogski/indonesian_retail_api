@@ -2,7 +2,7 @@ const ProductModel = require('../models/products');
 
 module.exports = {
   /**
-  * @api {get} /barcode/:barcode Request example information
+  * @api {get} /search/barcode/:barcode Get product by barcode
   * @apiName GetByBarcode
   * @apiGroup ProductSearch
   *
@@ -33,6 +33,39 @@ module.exports = {
       });
     }
   },
+
+    /**
+  * @api {get} /check/barcode/:barcode Check if barcode exists
+  * @apiName GetByBarcode
+  * @apiGroup ProductCheck
+  *
+  * @apiSuccess {String} result Result statement (FAILED, SUCCESS).
+  * @apiSuccess {String} message Confirm that product exists.
+  */
+  checkBarcodeExists: async (req, res) => {
+    try {
+      const payload = {barcode: req.params.barcode};
+      const result = await ProductModel.getByBarcode(payload);
+      if (!result) {
+        return res.status(400).json({
+          result : "ERROR",
+          message : "DATA_NOT_FOUND"
+        });
+      } else {
+        return res.status(200).json({
+          result : "SUCCESS",
+          message : `Product with barcode ${req.params.barcode} exists in database.`
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        result : "ERROR",
+        message : error
+      });
+    }
+  },
+
     /**
   * @api {get} /barcode/:barcode Request example information
   * @apiName GetByProductName
