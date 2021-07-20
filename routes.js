@@ -6,7 +6,9 @@ const ProductController = require('./controllers/products');
 router.get('/search/barcode/:barcode', ProductController.getByBarcode);
 router.get('/search/name/:name', ProductController.getByProductName);
 
+// Endpoint: barcode utility
 router.get('/check/barcode/:barcode', ProductController.checkBarcodeExists);
+router.post('/generate/barcode', ProductController.generateBarcodeSvg);
 // router.post('/examples', ProductController.create);
 
 // Return 404 for others
