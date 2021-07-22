@@ -1,30 +1,10 @@
 [
   {
-    "type": "post",
-    "url": "/examples",
-    "title": "Create example",
-    "name": "Create",
-    "group": "Example",
-    "parameter": {
-      "fields": {
-        "Request body JSON": [
-          {
-            "group": "Request body JSON",
-            "type": "String",
-            "optional": false,
-            "field": "item_1",
-            "description": "<p>Item 1 example</p>"
-          },
-          {
-            "group": "Request body JSON",
-            "type": "String",
-            "optional": false,
-            "field": "item_2",
-            "description": "<p>Item 2 example</p>"
-          }
-        ]
-      }
-    },
+    "type": "get",
+    "url": "/v1/check/barcode/:barcode",
+    "title": "Check Barcode Exists in Database",
+    "name": "CheckBarcodeExists",
+    "group": "BarcodeUtilities",
     "success": {
       "fields": {
         "Success 200": [
@@ -32,100 +12,63 @@
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "message",
-            "description": "<p>Message after result.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "controllers/example.js",
-    "groupTitle": "Example"
-  },
-  {
-    "type": "post",
-    "url": "/examples",
-    "title": "Create example",
-    "name": "Create",
-    "group": "Example",
-    "parameter": {
-      "fields": {
-        "Request body JSON": [
-          {
-            "group": "Request body JSON",
-            "type": "String",
-            "optional": false,
-            "field": "item_1",
-            "description": "<p>Item 1 example</p>"
+            "field": "result",
+            "description": "<p>Result statement (FAILED, SUCCESS).</p>"
           },
-          {
-            "group": "Request body JSON",
-            "type": "String",
-            "optional": false,
-            "field": "item_2",
-            "description": "<p>Item 2 example</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>Message after result.</p>"
+            "description": "<p>Confirm that product exists.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
     "filename": "controllers/products.js",
-    "groupTitle": "Example"
+    "groupTitle": "BarcodeUtilities"
   },
   {
-    "type": "get",
-    "url": "/examples",
-    "title": "Request example information",
-    "name": "GetAll",
-    "group": "Example",
+    "type": "post",
+    "url": "/v1/barcode/generate",
+    "title": "Create barcode",
+    "name": "GenerateBarcode",
+    "group": "BarcodeUtilities",
+    "parameter": {
+      "fields": {
+        "Request body JSON": [
+          {
+            "group": "Request body JSON",
+            "type": "String",
+            "optional": false,
+            "field": "content",
+            "description": "<p>Content Input string</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "integer",
+            "type": "SVG",
             "optional": false,
-            "field": "id",
-            "description": "<p>Id of example.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "item_1",
-            "description": "<p>First description of Example.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "item_2",
-            "description": "<p>Second description of Example.</p>"
+            "field": "Image",
+            "description": "<p>result in SVG format.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
-    "filename": "controllers/example.js",
-    "groupTitle": "Example"
+    "filename": "controllers/products.js",
+    "groupTitle": "BarcodeUtilities"
   },
   {
     "type": "get",
-    "url": "/barcode/:barcode",
-    "title": "Request example information",
+    "url": "/v1/search/barcode/:barcode",
+    "title": "Get product by barcode",
     "name": "GetByBarcode",
     "group": "ProductSearch",
     "success": {
@@ -133,24 +76,31 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "integer",
+            "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>Id of example.</p>"
+            "field": "barcode",
+            "description": "<p>Barcode string of the product.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "item_1",
-            "description": "<p>First description of Example.</p>"
+            "field": "product_name",
+            "description": "<p>Name of the product.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "item_2",
-            "description": "<p>Second description of Example.</p>"
+            "field": "category",
+            "description": "<p>Type/category of product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "unit_of_measure",
+            "description": "<p>UoM for the product</p>"
           }
         ]
       }
@@ -161,8 +111,8 @@
   },
   {
     "type": "get",
-    "url": "/barcode/:barcode",
-    "title": "Request example information",
+    "url": "/v1/search/name/:name",
+    "title": "Get barcode by product name",
     "name": "GetByProductName",
     "group": "ProductSearch",
     "success": {
@@ -170,24 +120,31 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "integer",
+            "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>Id of example.</p>"
+            "field": "barcode",
+            "description": "<p>Barcode string of the product.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "item_1",
-            "description": "<p>First description of Example.</p>"
+            "field": "product_name",
+            "description": "<p>Name of the product.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "item_2",
-            "description": "<p>Second description of Example.</p>"
+            "field": "category",
+            "description": "<p>Type/category of product.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "unit_of_measure",
+            "description": "<p>UoM for the product</p>"
           }
         ]
       }

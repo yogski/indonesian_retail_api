@@ -5,13 +5,14 @@ const formatter = require('../helpers/formatting');
 
 module.exports = {
   /**
-  * @api {get} /search/barcode/:barcode Get product by barcode
+  * @api {get} /v1/search/barcode/:barcode Get product by barcode
   * @apiName GetByBarcode
   * @apiGroup ProductSearch
   *
-  * @apiSuccess {integer} id Id of example.
-  * @apiSuccess {String} item_1 First description of Example.
-  * @apiSuccess {String} item_2 Second description of Example.
+  * @apiSuccess {String} barcode Barcode string of the product.
+  * @apiSuccess {String} product_name Name of the product.
+  * @apiSuccess {String} category Type/category of product.
+  * @apiSuccess {String} unit_of_measure UoM for the product
   */
   getByBarcode: async (req, res) => {
     try {
@@ -38,13 +39,14 @@ module.exports = {
   },
 
     /**
-  * @api {get} /search/category/:category Get barcode by product name
+  * @api {get} /v1/search/name/:name Get barcode by product name
   * @apiName GetByProductName
   * @apiGroup ProductSearch
   *
-  * @apiSuccess {integer} id Id of example.
-  * @apiSuccess {String} item_1 First description of Example.
-  * @apiSuccess {String} item_2 Second description of Example.
+  * @apiSuccess {String} barcode Barcode string of the product.
+  * @apiSuccess {String} product_name Name of the product.
+  * @apiSuccess {String} category Type/category of product.
+  * @apiSuccess {String} unit_of_measure UoM for the product
   */
   getByProductName: async (req, res) => {
     try {
@@ -71,14 +73,13 @@ module.exports = {
   },
 
   /**
-  * @api {post} /barcode/generate Create example
+  * @api {post} /v1/barcode/generate Create barcode
   * @apiName GenerateBarcode
   * @apiGroup BarcodeUtilities
   * 
-  * @apiParam (Request body JSON) {String} item_1 Item 1 example
-  * @apiParam (Request body JSON) {String} item_2 Item 2 example
+  * @apiParam (Request body JSON) {String} content Content Input string
   *
-  * @apiSuccess {String} message Message after result.
+  * @apiSuccess {SVG} Image result in SVG format.
   */
   generateBarcodeSvg: async (req, res) => {
     try {
@@ -101,7 +102,7 @@ module.exports = {
   },
 
   /**
-  * @api {get} /check/barcode/:barcode Check Barcode Exists in Database
+  * @api {get} /v1/check/barcode/:barcode Check Barcode Exists in Database
   * @apiName CheckBarcodeExists
   * @apiGroup BarcodeUtilities
   *
@@ -132,16 +133,7 @@ module.exports = {
     }
   },
 
-  /**
-  * @api {post} /examples Create example
-  * @apiName Create
-  * @apiGroup Example
-  * 
-  * @apiParam (Request body JSON) {String} item_1 Item 1 example
-  * @apiParam (Request body JSON) {String} item_2 Item 2 example
-  *
-  * @apiSuccess {String} message Message after result.
-  */
+
  create: async (req, res) => {
 
   }

@@ -1,7 +1,7 @@
 define({
-  "title": "Express Microservice Docs",
-  "url": "https://api.example.com/v1",
-  "name": "express-restful-boilerplate",
+  "title": "Simple Retail Product API",
+  "url": "http://localhost:5003",
+  "name": "retail-product-restful-api",
   "version": "1.0.0",
   "description": "",
   "sampleUrl": false,
@@ -9,7 +9,7 @@ define({
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2021-07-16T11:02:52.842Z",
+    "time": "2021-07-22T10:56:54.356Z",
     "url": "https://apidocjs.com",
     "version": "0.28.1"
   }
