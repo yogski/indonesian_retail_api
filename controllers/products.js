@@ -38,7 +38,7 @@ module.exports = {
     }
   },
 
-    /**
+  /**
   * @api {get} /v1/search/name/:name Get barcode by product name
   * @apiName GetByProductName
   * @apiGroup ProductSearch
@@ -113,7 +113,7 @@ module.exports = {
     try {
       const payload = {barcode: req.params.barcode};
       const result = await ProductModel.getByBarcode(payload);
-      if (!result) {
+      if (!result || result.length === 0) {
         return res.status(400).json({
           result : "ERROR",
           message :  `Product with barcode ${req.params.barcode} DOES NOT exist in database.`
@@ -133,8 +133,16 @@ module.exports = {
     }
   },
 
+  createProduct: async (req, res) => {
 
- create: async (req, res) => {
+  },
+
+  createProductBulk: async (req, res) => {
+
+  },
+
+  
+  updateProductDetail: (req, res) => {
 
   }
 }
