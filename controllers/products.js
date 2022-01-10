@@ -2,6 +2,8 @@ const ProductModel = require('../models/products');
 const JsBarcode = require('jsbarcode');
 const { DOMImplementation, XMLSerializer } = require('xmldom');
 const formatter = require('../helpers/formatting');
+const er = require('../helpers/errors');
+const validator = require('../middleware/validators/products');
 
 module.exports = {
   /**
@@ -134,11 +136,24 @@ module.exports = {
   },
 
   createProduct: async (req, res) => {
+    try {
+      const err = validator.newSingleProduct(req.body);
+      if (!err) {
+        
+      } else {
 
+      }
+    } catch (error) {
+      er.handleErrorResponse(error, res)
+    }
   },
 
   createProductBulk: async (req, res) => {
-
+    try {
+      
+    } catch (error) {
+      
+    }
   },
 
   

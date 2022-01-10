@@ -11,6 +11,9 @@ router.get('/check/barcode/:barcode', ProductController.checkBarcodeExists);
 router.post('/generate/barcode', ProductController.generateBarcodeSvg);
 // router.post('/examples', ProductController.create);
 
+// Endpoint: product creation
+router.post('/create/product', ProductController.createProduct);
+
 // Return 404 for others
 router.get('*', function (req, res) {
   res.status(404).json();
