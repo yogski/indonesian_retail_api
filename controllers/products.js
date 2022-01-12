@@ -4,6 +4,7 @@ const { DOMImplementation, XMLSerializer } = require('xmldom');
 const formatter = require('../helpers/formatting');
 const er = require('../helpers/errors');
 const validator = require('../middleware/validators/products');
+const barv = require("barcode-validator");
 
 module.exports = {
   /**
@@ -136,15 +137,27 @@ module.exports = {
   },
 
   createProduct: async (req, res) => {
-    try {
+    try { 
       const err = validator.newSingleProduct(req.body);
-      if (!err) {
-        
-      } else {
-
+      if (err) {
+        er.handleFailedValidationResponse(err, res);
       }
+
+      if (!barv(req.body.barcode) && req.body.barcode.toString().length < 8) {
+        er.handleCustomLogicResponse(`Unacceptable barcode: ${req.body.barcode}`, res);
+      }
+
+      const insert = await ProductModel.createNewProduct(req.body);
+      if (insert) {
+        console.log(`New product created: ID ${insert.id}, barcode ${insert.barcode}`);
+      }
+
+      return res.status(201).json({
+        result : "SUCCESS",
+        message : `Product created.`
+      });
     } catch (error) {
-      er.handleErrorResponse(error, res)
+      er.handleErrorResponse(error, res);
     }
   },
 
@@ -155,7 +168,6 @@ module.exports = {
       
     }
   },
-
   
   updateProductDetail: (req, res) => {
 

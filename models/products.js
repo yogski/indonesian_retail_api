@@ -62,9 +62,49 @@ module.exports = {
       throw new Error(error);
     }
   },
-  create : async (payload) => {
+  createNewProduct : async (payload) => {
     try {
-      const create = await await db.none('INSERT INTO examples(column1, column2) VALUES($1, $2)', [payload.item_1, payload.item_2])
+      const create = await db.oneOrNone(
+        `INSERT INTO main_products
+          (
+          barcode,
+          product_name,
+          category,
+          unit_of_measure,
+          uom_count,
+          is_active,
+          created_at,
+          updated_at,
+          mui_cert,
+          bpom_cert,
+          manufacturer,
+          netto,
+          netto_unit,
+          pirt_cert,
+          kemenkes_cert,
+          reg_no_cert,
+          brand)
+        VALUES($1, $2, $3, $4, $5, 1, NOW(), NOW(), $6,
+        $7, $8, $9, $10, $11, $12, $13, $14)
+        RETURNING *`
+        , [
+          payload.barcode,
+          payload.product_name,
+          payload.category,
+          payload.unit_of_measure,
+          payload.uom_count,
+          payload.mui_cert,
+          payload.bpom_cert,
+          payload.manufacturer,
+          payload.netto,
+          payload.netto_unit,
+          payload.pirt_cert,
+          payload.kemenkes_cert,
+          payload.reg_no_cert,
+          payload.brand
+        ]
+      )
+      return create;
     } catch (error) {
       throw new Error(error);      
     }

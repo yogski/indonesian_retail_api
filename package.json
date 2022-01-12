@@ -16,6 +16,7 @@
   "author": "Yogi Saputro",
   "license": "MIT",
   "dependencies": {
+    "barcode-validator": "^1.0.2",
     "cors": "^2.8.5",
     "env-cmd": "^10.1.0",
     "express": "^4.17.1",

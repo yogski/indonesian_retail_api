@@ -1,6 +1,6 @@
 CREATE TABLE public.main_products (
-  id integer NOT NULL,
-  barcode character varying(20) NULL,
+  id integer NOT NULL PRIMARY KEY,
+  barcode character varying(20) NULL UNIQUE,
   product_name character varying(80) NULL,
   category character varying(20) NULL,
   unit_of_measure character varying(20) NULL,
@@ -21,4 +21,4 @@ CREATE TABLE public.main_products (
 ALTER TABLE
   public.main_products
 ADD
-  CONSTRAINT main_products_pkey PRIMARY KEY (id)
+  CONSTRAINT main_products_pkey PRIMARY KEY (id);
