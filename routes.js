@@ -16,7 +16,7 @@ router.post('/create/product', ProductController.createProduct);
 
 // Return 404 for others
 router.get('*', function (req, res) {
-  res.status(404).json();
+  res.status(200).json({header: req.headers});
 });
 
 module.exports = router;
